@@ -1,0 +1,39 @@
+version: "3"
+services:
+  naqs_mongo:
+    container_name: naqs_mongo
+    image: mongo
+    environment:
+      MONGO_INITDB_DATABASE: naqs
+      MONGO_INITDB_ROOT_USERNAME: naqs_user
+      MONGO_INITDB_ROOT_PASSWORD: naqs_password
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb-data:/data/db
+    networks:
+      naqs_database:
+
+  naqs_api:
+    container_name: naqs_api
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - naqs_mongo
+    ports:
+      - "1933:1933"
+    volumes:
+      - ./:/srv/app
+      - /srv/app/node_modules
+    networks:
+      naqs_database:
+      naqs_backend:
+
+networks:
+  naqs_database:
+    driver: bridge
+  naqs_backend:
+    driver: bridge
