@@ -112,15 +112,7 @@ const login = async (req, res) => {
 // ****************************************************
 
 const checkAuth = async (req, res) => {
-  try {
-    const user = await models.user.findOne(
-      { _id: req.user._id },
-      "_id email createdOn"
-    );
-    return response.sendApiSuccessResponse(res, 200, user, "User verified");
-  } catch (err) {
-    return response.sendApiErrorResponse(res, 500, err, "An error occured");
-  }
+  return response.sendApiSuccessResponse(res, 200, req.user, "User verified");
 };
 
 module.exports = {
