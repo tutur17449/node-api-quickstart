@@ -29,7 +29,7 @@ const getPosts = async (req, res) => {
 
 const getPost = async (req, res) => {
   try {
-    const post = await models.post.findOne({}).populate({
+    const post = await models.post.findOne({ _id: req.params.id }).populate({
       path: "author",
       select: "email",
     });

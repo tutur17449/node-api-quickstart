@@ -4,7 +4,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const responseTime = require("response-time");
 const path = require("path");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 const PORT = process.env.PORT || 1933;
+
+const swaggerOptions = require("./src/lib/swagger");
 const corsOptions = require("./src/lib/cors");
 const passport = require("./src/lib/passport");
 const apiRouter = require("./src/routes");
@@ -37,6 +41,10 @@ class Server {
 
   routes() {
     new apiRouter(this.server).init();
+
+    const specs = swaggerJsdoc(swaggerOptions);
+    this.server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
     this.start();
   }
 

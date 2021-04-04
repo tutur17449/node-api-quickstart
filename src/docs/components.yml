@@ -1,0 +1,40 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        createdOn:
+          type: date
+      example:
+        id: 5ebac534954b54139806c112
+        email: user@test.fr
+        createdOn: 2021-04-04T13:47:48.829Z
+
+    Post:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+        author:
+          $ref: "#/components/schemas/User"
+        createdOn:
+          type: date
+      example:
+        id: 5ebac534954b54139806c112
+        title: Post 1
+        content: Post 1 content ...
+        createdOn: 2021-04-04T13:47:48.829Z
+  securitySchemes:
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT # optional, arbitrary value for documentation purposes
