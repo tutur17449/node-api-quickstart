@@ -9,7 +9,19 @@
     "dev": "nodemon server.js",
     "seed": "node ./src/database/seeder.js"
   },
-  "keywords": [],
+  "keywords": [
+    "node",
+    "node.js",
+    "boilerplate",
+    "express",
+    "rest",
+    "api",
+    "mongodb",
+    "mongoose",
+    "docker",
+    "passport",
+    "swagger"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
