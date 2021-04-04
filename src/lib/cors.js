@@ -1,9 +1,20 @@
 const corsOptions = function (req, res, next) {
-  const domains = Array.from(process.env.CORS_DOMAINS) || "*";
+  const domains = process.env.CORS_DOMAINS.split(",");
+  const origin = req.headers.origin;
 
-  res.header("Access-Control-Allow-Origin", domains);
-  res.header("Access-Control-Allow-Methods", "PUT,POST,DELETE");
+  if (domains.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+  }
+
+  res.header("Access-Control-Allow-Methods", [
+    "GET",
+    "PUT",
+    "POST",
+    "DELETE",
+    "POST",
+  ]);
   res.header("Access-Control-Allow-Headers", "Content-Type");
+
   next();
 };
 

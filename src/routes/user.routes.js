@@ -3,8 +3,7 @@ const passport = require("passport");
 const methods = require("../controllers").user;
 
 class UserRouter {
-  constructor(passport) {
-    this.passport = passport;
+  constructor() {
     this.router = express.Router();
   }
 
