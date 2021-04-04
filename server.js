@@ -3,6 +3,7 @@ dotenv.config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const responseTime = require("response-time");
+const path = require("path");
 const PORT = process.env.PORT || 1933;
 const corsOptions = require("./src/lib/cors");
 const passport = require("./src/lib/passport");
@@ -18,6 +19,7 @@ class Server {
     this.server.disable("x-powered-by");
     this.server.use(corsOptions);
     this.server.use(passport.initialize());
+    this.server.use(express.static(path.join(__dirname, "public")));
     this.server.use(bodyParser.json({ limit: "10mb" }));
     this.server.use(bodyParser.urlencoded({ extended: true }));
     this.server.use(
