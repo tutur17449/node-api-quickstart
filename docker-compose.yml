@@ -4,13 +4,15 @@ services:
     container_name: naqs_mongo
     image: mongo
     environment:
-      MONGO_INITDB_DATABASE: naqs
-      MONGO_INITDB_ROOT_USERNAME: naqs_user
-      MONGO_INITDB_ROOT_PASSWORD: naqs_password
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    env_file:
+      - .env
     ports:
       - "27017:27017"
     volumes:
       - ./mongodb-data:/data/db
+      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh:ro
     networks:
       naqs_database:
 

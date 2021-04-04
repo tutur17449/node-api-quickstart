@@ -2,11 +2,8 @@ const mongoose = require("mongoose");
 
 const mongoInit = () => {
   return mongoose.connect(
-    `mongodb://${process.env.DATABASE_HOST}:${process.env.DATABASE_PORT}/`,
+    `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_INITDB_DATABASE}`,
     {
-      dbName: process.env.DATABASE_NAME,
-      user: process.env.DATABASE_USERNAME,
-      pass: process.env.DATABASE_PASSWORD,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }
