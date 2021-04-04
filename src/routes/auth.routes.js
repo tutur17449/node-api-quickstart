@@ -10,6 +10,11 @@ class AuthRouter {
   routes() {
     this.router.post("/login", methods.login);
     this.router.post("/register", methods.register);
+    this.router.get(
+      "/me",
+      passport.authenticate("jwt", { session: false }),
+      methods.checkAuth
+    );
   }
 
   init() {

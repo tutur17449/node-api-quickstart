@@ -32,8 +32,8 @@ const register = async (req, res) => {
       return response.sendApiErrorResponse(
         res,
         409,
-        "User already exist.",
-        "User already exist."
+        "User already exist",
+        "User already exist"
       );
     }
 
@@ -105,7 +105,26 @@ const login = async (req, res) => {
   }
 };
 
+// ****************************************************
+// @desc    Check auth
+// @route   GET /api/auth/me
+// @access  Private
+// ****************************************************
+
+const checkAuth = async (req, res) => {
+  try {
+    const user = await models.user.findOne(
+      { _id: req.user._id },
+      "_id email createdOn"
+    );
+    return response.sendApiSuccessResponse(res, 200, user, "User verified");
+  } catch (err) {
+    return response.sendApiErrorResponse(res, 500, err, "An error occured");
+  }
+};
+
 module.exports = {
   register,
   login,
+  checkAuth,
 };

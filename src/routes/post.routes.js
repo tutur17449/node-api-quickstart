@@ -9,6 +9,22 @@ class PostRouter {
 
   routes() {
     this.router.get("/", methods.getPosts);
+    this.router.get("/:id", methods.getPost);
+    this.router.post(
+      "/",
+      passport.authenticate("jwt", { session: false }),
+      methods.createPost
+    );
+    this.router.put(
+      "/:id",
+      passport.authenticate("jwt", { session: false }),
+      methods.updatePost
+    );
+    this.router.delete(
+      "/:id",
+      passport.authenticate("jwt", { session: false }),
+      methods.deletePost
+    );
   }
 
   init() {
